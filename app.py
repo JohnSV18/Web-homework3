@@ -53,7 +53,7 @@ def compliments_results():
     """Show the user some compliments."""
     num_of_compliments = int(request.args.get('num_compliments'))
     context = {
-        # TODO: Enter your context variables here.
+        
         'users_name': request.args.get('users_name'),
         'wants_compliments': request.args.get('wants_compliments'),
         'compliments_list':random.sample(list_of_compliments, k=num_of_compliments)
@@ -81,13 +81,12 @@ animal_to_fact = {
 def animal_facts():
     """Show a form to choose an animal and receive facts."""
 
-    # TODO: Collect the form data and save as variables
+    
 
     context = {
-        # TODO: Enter your context variables here for:
-        # - the list of all animals (get from animal_to_fact)
+        
         'animals_list': animal_to_fact,
-        # - the chosen animal fact (may be None if the user hasn't filled out the form yet)
+        
         'chosen_animal': request.args.get('animals')
     }
     return render_template('animal_facts.html', **context)
@@ -109,15 +108,13 @@ filter_types_dict = {
 
 def save_image(image, filter_type):
     """Save the image, then return the full file path of the saved image."""
-    # Append the filter type at the beginning (in case the user wants to 
-    # apply multiple filters to 1 image, there won't be a name conflict)
+   
     new_file_name = f"{filter_type}-{image.filename}"
     image.filename = new_file_name
 
-    # Construct full file path
     file_path = os.path.join(app.root_path, 'static/images', new_file_name)
     
-    # Save the image
+  
     image.save(file_path)
 
     return file_path
@@ -137,28 +134,24 @@ def image_filter():
 
     if request.method == 'POST':
         
-        # TODO: Get the user's chosen filter type (whichever one they chose in the form) and save
-        # as a variable
+        
         filter_type = request.form.get('filter_type')
         
-        # Get the image file submitted by the user
+        
         image = request.files.get('users_image')
 
-        # TODO: call `save_image()` on the image & the user's chosen filter type, save the returned
-        # value as the new file path
+        
         file_path = save_image(image,filter_type)
 
-        # TODO: Call `apply_filter()` on the file path & filter type
+        
         apply_filter(file_path,filter_type)
 
         image_url = f'/static/images/{image.filename}'
 
         context = {
-            # TODO: Add context variables here for:
-
-            # - The full list of filter types
+        
             'filter_list': filter_types_dict.keys(),
-            # - The image URL
+           
             'image_url': image_url,
             
             
@@ -166,9 +159,9 @@ def image_filter():
 
         return render_template('image_filter.html', **context)
 
-    else: # if it's a GET request
+    else: 
         context = {
-            # TODO: Add context variable here for the full list of filter types
+            
             'filter_list': filter_types
         }
         return render_template('image_filter.html', **context)
@@ -186,15 +179,14 @@ pp = PrettyPrinter(indent=4)
 def gif_search():
     """Show a form to search for GIFs and show resulting GIFs from Tenor API."""
     if request.method == 'POST':
-        # TODO: Get the search query & number of GIFs requested by the user, store each as a 
-        # variable
+        
         query = request.form.get('search_query')
         number = request.form.get('quantity')
 
         response = requests.get(
             TENOR_URL,
             {
-                # TODO: Add in key-value pairs for:
+                
                  'q': query,
 
                  'key': API_KEY,
@@ -208,7 +200,7 @@ def gif_search():
             'gifs': gifs
         }
 
-        # Uncomment me to see the result JSON!
+       
         pp.pprint(gifs)
 
         return render_template('gif_search.html', **context)
