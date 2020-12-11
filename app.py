@@ -1,10 +1,23 @@
 from flask import Flask, request, render_template
 from PIL import Image, ImageFilter
 from pprint import PrettyPrinter
+from pymongo import MongoClient
+from dotenv import load_dotenv
 import json
 import os
 import random
 import requests
+
+
+
+client = pymongo.MongoClient("mongodb+srv://Johnze96:Charizard96@pokemon.jaiz1.mongodb.net/John.saguay@students.makeschool.com?retryWrites=true&w=majority")
+db = client.test
+
+load_dotenv()
+MONGODB_USERNAME = os.getenv('Johnze96')
+MONGODB_PASSWORD = os.getenv('Charizard96')
+MONGODB_DBNAME = 'mydb'
+
 
 app = Flask(__name__)
 
