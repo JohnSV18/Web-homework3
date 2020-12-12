@@ -10,11 +10,11 @@ import requests
 
 
 
-client = pymongo.MongoClient("mongodb+srv://Johnze96:Charizard96@pokemon.jaiz1.mongodb.net/John.saguay@students.makeschool.com?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://John.saguay@students.makeschool.com:Charizard96@pokemon.jaiz1.mongodb.net/John.saguay@students.makeschool.com?retryWrites=true&w=majority")
 db = client.test
 
 load_dotenv()
-MONGODB_USERNAME = os.getenv('Johnze96')
+MONGODB_USERNAME = os.getenv('John.saguay@students.makeschool.com')
 MONGODB_PASSWORD = os.getenv('Charizard96')
 MONGODB_DBNAME = 'mydb'
 
